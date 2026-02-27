@@ -3,9 +3,7 @@
     "version": "1.0.0",
     "description": "Node.js replacement for Gold Rate Java Backend",
     "type": "module",
-    "scripts": {
-        "dev": "vercel dev"
-    },
+    "scripts": {},
     "devDependencies": {
         "vercel": "^50.25.2"
     }
