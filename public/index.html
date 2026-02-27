@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Gold & Silver Price</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-row">
+                <h1>Live Gold & Silver Price</h1>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div id="error" class="error-msg hidden">
+                <p>Failed to load data. Please try again later.</p>
+                <button onclick="fetchRates()">Retry</button>
+            </div>
+
+            <div id="dashboard" class="dashboard">
+
+                <div class="cards-grid">
+                    <!-- Gold Card -->
+                    <div class="metal-card gold">
+                        <div class="card-header">
+                            <div class="icon-wrapper">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                                    <path d="M12 18V6"></path>
+                                </svg>
+                            </div>
+                            <h2>Gold (24K)</h2>
+                        </div>
+                        <div class="price-info">
+                            <span class="currency">₹</span>
+                            <span class="amount" id="gold-price">--</span>
+                            <span class="unit">/ gram</span>
+                        </div>
+                        <div class="extra-info">
+                            <p>Global: <span id="gold-usd">--</span> USD/oz</p>
+                        </div>
+                    </div>
+
+                    <!-- Silver Card -->
+                    <div class="metal-card silver">
+                        <div class="card-header">
+                            <div class="icon-wrapper">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                                    <path d="M12 18V6"></path>
+                                </svg>
+                            </div>
+                            <h2>Silver</h2>
+                        </div>
+                        <div class="price-info">
+                            <span class="currency">₹</span>
+                            <span class="amount" id="silver-price">--</span>
+                            <span class="unit">/ gram</span>
+                        </div>
+                        <div class="extra-info">
+                            <p>Global: <span id="silver-usd">--</span> USD/oz</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metrics-row">
+                    <div class="metric-chip">
+                        <span class="label">USD to INR</span>
+                        <span class="value">₹ <span id="usd-inr">--</span></span>
+                    </div>
+                    <div class="metric-chip">
+                        <span class="label">Includes</span>
+                        <span class="value">6% Customs + 3% GST</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer>
+            <p class="timestamp">Last updated: <span id="last-updated">--</span></p>
+        </footer>
+
+        <!-- Calculation Breakdown -->
+        <section id="calc-breakdown" class="calc-breakdown hidden">
+            <h3>Price Calculation Breakdown</h3>
+            <div class="calc-grid">
+                <div class="calc-column">
+                    <h4>🥇 Gold</h4>
+                    <table>
+                        <tr>
+                            <td>International price (per oz)</td>
+                            <td class="calc-val">₹ <span id="calc-gold-oz">--</span></td>
+                        </tr>
+                        <tr>
+                            <td>+ 6% Customs Duty</td>
+                            <td class="calc-val">₹ <span id="calc-gold-customs">--</span></td>
+                        </tr>
+                        <tr>
+                            <td>+ 3% GST</td>
+                            <td class="calc-val">₹ <span id="calc-gold-gst">--</span></td>
+                        </tr>
+                        <tr class="calc-final">
+                            <td>÷ 31.103 (per gram)</td>
+                            <td class="calc-val">₹ <span id="calc-gold-gram">--</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="calc-column">
+                    <h4>🥈 Silver</h4>
+                    <table>
+                        <tr>
+                            <td>International price (per oz)</td>
+                            <td class="calc-val">₹ <span id="calc-silver-oz">--</span></td>
+                        </tr>
+                        <tr>
+                            <td>+ 6% Customs Duty</td>
+                            <td class="calc-val">₹ <span id="calc-silver-customs">--</span></td>
+                        </tr>
+                        <tr>
+                            <td>+ 3% GST</td>
+                            <td class="calc-val">₹ <span id="calc-silver-gst">--</span></td>
+                        </tr>
+                        <tr class="calc-final">
+                            <td>÷ 31.103 (per gram)</td>
+                            <td class="calc-val">₹ <span id="calc-silver-gram">--</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
