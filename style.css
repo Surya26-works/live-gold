@@ -138,6 +138,13 @@ h1 {
     display: none !important;
 }
 
+/* ===== Dashboard ===== */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 /* ===== Cards Grid ===== */
 .cards-grid {
     display: grid;
@@ -304,7 +311,7 @@ footer {
 }
 
 .calc-breakdown h3 {
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-primary);
@@ -324,14 +331,14 @@ footer {
 
 .calc-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
 }
 
 .calc-column h4 {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     color: var(--text-secondary);
 }
 
@@ -341,10 +348,10 @@ footer {
 }
 
 .calc-column td {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     vertical-align: middle;
-    padding: 0.25rem 0;
+    padding: 0.35rem 0;
     white-space: nowrap;
 }
 
@@ -357,6 +364,7 @@ footer {
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     color: var(--text-primary);
+    font-size: 0.85rem;
 }
 
 .calc-column tr.calc-final td {
@@ -367,7 +375,7 @@ footer {
 }
 
 .calc-column tr.calc-final td.calc-val {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 800;
 }
 
@@ -480,14 +488,14 @@ footer {
     }
 
     .calc-column td {
-        font-size: 0.6rem;
+        font-size: 0.75rem;
     }
 
     .calc-column td.calc-val {
-        font-size: 0.6rem;
+        font-size: 0.8rem;
     }
 
     .calc-column tr.calc-final td.calc-val {
-        font-size: 0.72rem;
+        font-size: 0.9rem;
     }
 }
