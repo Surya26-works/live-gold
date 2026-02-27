@@ -1,0 +1,493 @@
+/* ===== Light Mode (default) ===== */
+:root {
+    --bg-main: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --gold: #d97706;
+    --silver: #475569;
+
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    --accent: #2563eb;
+    --border: rgba(15, 23, 42, 0.08);
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 20px -4px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] {
+    --bg-main: #0b1121;
+    --bg-card: rgba(30, 41, 59, 0.6);
+
+    --gold: #fbbf24;
+    --silver: #e2e8f0;
+
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --accent: #3b82f6;
+    --border: rgba(255, 255, 255, 0.08);
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 20px -4px rgba(0, 0, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 3rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.5;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 640px;
+    padding: 0 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ===== Header ===== */
+header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    animation: fadeInDown 0.5s ease-out;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+/* ===== Theme Toggle ===== */
+.theme-toggle {
+    position: absolute;
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.theme-toggle:hover {
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(30, 41, 59, 0.9);
+}
+
+.icon-sun {
+    display: none;
+}
+
+.icon-moon {
+    display: block;
+}
+
+[data-theme="dark"] .icon-moon {
+    display: none;
+}
+
+[data-theme="dark"] .icon-sun {
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== Cards Grid ===== */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* ===== Metal Cards ===== */
+.metal-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeInUp 0.4s ease-out backwards;
+    box-shadow: var(--shadow-sm);
+}
+
+.metal-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.metal-card.silver {
+    animation-delay: 0.08s;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.icon-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gold .icon-wrapper {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--gold);
+}
+
+.silver .icon-wrapper {
+    background: rgba(100, 116, 139, 0.1);
+    color: var(--silver);
+}
+
+.card-header h2 {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* ===== Price Display ===== */
+.price-info {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+    margin-bottom: 0.75rem;
+}
+
+.currency {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.amount {
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.gold .amount {
+    color: var(--gold);
+}
+
+.silver .amount {
+    color: var(--silver);
+}
+
+.unit {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 0.15rem;
+}
+
+.extra-info {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+/* ===== Metrics Row ===== */
+.metrics-row {
+    display: flex;
+    gap: 0.75rem;
+    animation: fadeInUp 0.4s ease-out backwards;
+    animation-delay: 0.15s;
+}
+
+.metric-chip {
+    flex: 1;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.metric-chip .label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.metric-chip .value {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+/* ===== Footer ===== */
+footer {
+    display: flex;
+    justify-content: center;
+    animation: fadeIn 0.8s ease-out 0.3s backwards;
+}
+
+.timestamp {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* ===== Calculation Breakdown ===== */
+.calc-breakdown {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.calc-breakdown h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.calc-breakdown h3::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 3px;
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.calc-column h4 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.calc-column table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calc-column td {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    vertical-align: middle;
+    padding: 0.25rem 0;
+    white-space: nowrap;
+}
+
+.calc-column td:first-child {
+    padding-right: 0.5rem;
+}
+
+.calc-column td.calc-val {
+    text-align: right;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+}
+
+.calc-column tr.calc-final td {
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.calc-column tr.calc-final td.calc-val {
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.calc-column:first-child tr.calc-final td.calc-val {
+    color: var(--gold);
+}
+
+.calc-column:last-child tr.calc-final td.calc-val {
+    color: var(--silver);
+}
+
+/* ===== Error Message ===== */
+.error-msg {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 12px;
+    color: #ef4444;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.error-msg button {
+    margin-top: 0.75rem;
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.error-msg button:hover {
+    background: #dc2626;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 480px) {
+    body {
+        padding-top: 1.5rem;
+    }
+
+    .app-container {
+        padding: 0 1rem 2rem;
+        gap: 1rem;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .metal-card {
+        padding: 1rem;
+    }
+
+    .amount {
+        font-size: 1.6rem;
+    }
+
+    .metrics-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .calc-breakdown {
+        padding: 1rem;
+    }
+
+    .calc-column td {
+        font-size: 0.6rem;
+    }
+
+    .calc-column td.calc-val {
+        font-size: 0.6rem;
+    }
+
+    .calc-column tr.calc-final td.calc-val {
+        font-size: 0.72rem;
+    }
+}
