@@ -1,26 +1,19 @@
 {
-    "builds": [
+    "rewrites": [
         {
-            "src": "api/**/*.js",
-            "use": "@vercel/node"
-        },
-        {
-            "src": "public/**",
-            "use": "@vercel/static"
+            "source": "/api/gold/price/details",
+            "destination": "/api/gold/price/details"
         }
     ],
-    "routes": [
+    "headers": [
         {
-            "src": "/api/(.*)",
-            "dest": "/api/$1"
-        },
-        {
-            "src": "^/$",
-            "dest": "/public/index.html"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/public/$1"
+            "source": "/api/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "s-maxage=60, stale-while-revalidate=120"
+                }
+            ]
         }
     ]
 }
