@@ -1,9 +1,31 @@
 {
-    "rewrites": [
+    "version": 2,
+    "builds": [
         {
-            "source": "/api/gold/price/details",
-            "destination": "/api/gold/price/details"
+            "src": "api/**/*.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "public/**",
+            "use": "@vercel/static"
         }
     ],
-    "outputDirectory": "public"
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/api/$1"
+        },
+        {
+            "src": "/(.*\\.css)",
+            "dest": "/public/$1"
+        },
+        {
+            "src": "/(.*\\.js)",
+            "dest": "/public/$1"
+        },
+        {
+            "src": "/",
+            "dest": "/public/index.html"
+        }
+    ]
 }
