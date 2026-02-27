@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/gold/price/details",
+            "destination": "/api/gold/price/details"
+        }
+    ],
+    "outputDirectory": "public"
+}
